@@ -4,24 +4,135 @@ const featuresList = document.querySelector("#features-list");
 const featuresBtn = document.querySelector("#features-btn");
 const exitBtn = document.querySelector("#exit-btn");
 const hamburgerIcon = document.querySelector("#hamburger-icon");
+const normalNavigation = document.querySelector(".nav-wrapper");
+const mobileNavigation = document.querySelector(".nav-sm");
 
 expandBtn.addEventListener("click", expandArea);
 featuresBtn.addEventListener("click", featuresExpandArea, false);
 exitBtn.addEventListener("click", mobileNavToggle);
 hamburgerIcon.addEventListener("click", mobileNavToggle);
 
+// function slideshowBtnToggle() {
+//   if (cardList.length === 5) {
+//     addBtn.disabled = true;
+//   } else {
+//     addBtn.disabled = false;
+//   }
+// }
+
+// Slideshow animation logic
+const subductBtnDesktop = document.querySelector("#subduct-card-desktop");
+const subductBtnMobile = document.querySelector("#subduct-card-mobile");
+const addBtnDekstop = document.querySelector("#add-card-desktop");
+const addBtnMobile = document.querySelector("#add-card-mobile");
+
+const slideshowCard1 = document.querySelector("#slideshow-card-1");
+const slideshowCard2 = document.querySelector("#slideshow-card-2");
+const slideshowCard3 = document.querySelector("#slideshow-card-3");
+const slideshowCard4 = document.querySelector("#slideshow-card-4");
+const slideshowCard5 = document.querySelector("#slideshow-card-5");
+
+const cardList = [
+  slideshowCard1,
+  slideshowCard2,
+  slideshowCard3,
+  slideshowCard4,
+  slideshowCard5,
+];
+
+const discardedList = [];
+
+subductBtnDesktop.addEventListener("click", subductCard);
+addBtnDekstop.addEventListener("click", addCard);
+
+subductBtnMobile.addEventListener("click", subductCard);
+addBtnMobile.addEventListener("click", addCard);
+
+function subductCard() {
+  const test = cardList.shift();
+  discardedList.unshift(test);
+  console.log(discardedList);
+  test.style.opacity = "0";
+  // test.style.transform = "translate(-300px)";
+  test.style.maxWidth = "0";
+  test.style.maxHeight = "0";
+  test.addEventListener(
+    "transitionend",
+    function (e) {
+      test.classList.remove("slideshow-card");
+      test.style.display = "none";
+      if (cardList.length === 5) {
+        addBtnDekstop.disabled = true;
+        addBtnMobile.disabled = true;
+      } else {
+        addBtnDekstop.disabled = false;
+        addBtnMobile.disabled = false;
+      }
+      if (cardList.length === 1) {
+        subductBtnDesktop.disabled = true;
+        subductBtnMobile.disabled = true;
+      } else {
+        subductBtnDesktop.disabled = false;
+        subductBtnMobile.disabled = false;
+      }
+    },
+    {
+      capture: false,
+      once: true,
+      passive: false,
+    }
+  );
+}
+
+function addCard() {
+  const test2 = discardedList.shift();
+  cardList.unshift(test2);
+  console.log(cardList);
+  test2.style.display = "block";
+
+  setTimeout(function () {
+    test2.style.transition = "all 0.2s linear";
+    test2.style.opacity = "1";
+    // test2.style.transform = "translate(0px)";
+    test2.style.maxWidth = "500px";
+    test2.style.maxHeight = "500px";
+
+    if (cardList.length === 5) {
+      addBtnDekstop.disabled = true;
+      addBtnMobile.disabled = true;
+    } else {
+      addBtnDekstop.disabled = false;
+      addBtnMobile.disabled = false;
+    }
+    if (cardList.length === 1) {
+      subductBtnDesktop.disabled = true;
+      subductBtnMobile.disabled = true;
+    } else {
+      subductBtnDesktop.disabled = false;
+      subductBtnMobile.disabled = false;
+    }
+  }, 20);
+}
+
+// Navigation change on scroll
 window.onscroll = function () {
-  scrollFunction();
+  if (window.innerWidth < 1200) {
+    scrollFunction(mobileNavigation);
+  } else {
+    console.log(window.innerWidth);
+    scrollFunction(normalNavigation);
+  }
 };
 
-function scrollFunction() {
+function scrollFunction(navSize) {
   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-    document.querySelector(".nav-wrapper").style.backgroundColor =
-      "rgba(255, 255, 255, .8)";
+    navSize.style.backgroundColor = "rgba(255, 255, 255, .9)";
   } else {
-    document.querySelector(".nav-wrapper").style.backgroundColor = "#fff";
+    navSize.style.backgroundColor = "#fff";
   }
 }
+
+// Within nav list, expansion of the Features subsection - Desktop version
 
 function expandArea() {
   if (document.querySelector(".extension-area").style.display == "none") {
@@ -43,6 +154,7 @@ function expandArea() {
   }
 }
 
+// Within nav list, expansion of the Features subsection - Mobile version
 function featuresExpandArea() {
   if (
     featuresList.classList.contains("is-off-display") &&
@@ -71,6 +183,8 @@ function featuresExpandArea() {
     );
   }
 }
+
+// Nav hamburger expansion movement
 
 function mobileNavToggle() {
   const mobileNav = document.querySelector("#mobile-nav");

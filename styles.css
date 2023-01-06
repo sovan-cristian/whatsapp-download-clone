@@ -43,6 +43,32 @@ body{
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
+    transition: width 1s linear;
+    border-bottom: 0px;
+}
+
+.hover-effect{
+    background-color: #25d366;
+    bottom: -2px;
+    height: 2px;
+    width: 0%;
+    transition: width .33s linear;
+}
+
+.hover-effects{
+    background-color: #25d366;
+    bottom: -2px;
+    height: 2px;
+    width: 0%;
+    transition: width .33s linear;
+}
+
+a:hover > .hover-effect{
+    width: 100%;
+}
+
+span:hover > .hover-effects{
+    width: 100%;
 }
 
 .nav ul li button{
@@ -58,7 +84,13 @@ body{
     gap: 3px;
 }
 
+.nav-right{
+    display: flex;
+    align-items: center;
+}
+
 .nav-right a{
+    font-size: 16px;
     text-decoration: none;
     color: inherit;
 }
@@ -74,6 +106,37 @@ body{
     border-radius: 50px;
     line-height: 16px;
     padding: 16px 28px;
+    z-index: 50;
+    transition: color 1s;
+}
+
+.nav-right-2::before{
+    content: "";
+    position: fixed;
+    z-index: -1;
+    background: #111b21;
+    color: #fff;
+    border-radius: 50px;
+    top: 14px;
+    right: 40px;
+    height: 52px;
+    width: 150px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.nav-right-2:hover{
+    color: #fff;
+}
+
+.nav-right-2:hover::before{
+    transform: scale(1);
 }
 
 .nav-right-span svg {
@@ -95,6 +158,18 @@ body{
     gap: 24px;
     justify-content: center;
     list-style-type: none;
+}
+
+.nav-card:hover{
+    background-color: #25d366;
+}
+
+.nav-card:hover > .nav-icon {
+    background-color: #111b21;
+}
+
+.nav-card:hover > .nav-icon svg {
+    color: #25d366;
 }
 
 .nav-bar-extended li .nav-card{
@@ -205,6 +280,7 @@ main{
 
 .main-top-heading-text-link a{
     color: #1c1e21;
+    border-bottom: 1px solid #1c1e21;
 }
 
 .cards-wrapper{
@@ -234,6 +310,7 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 }
 
 .card-description, .card-heading{
@@ -290,6 +367,35 @@ main{
     align-items: center;
     text-decoration: none;
     gap: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.download-logo::after{
+    content: "";
+    position:absolute;
+    background: #111b21;
+    color: #fff;
+    border-radius: 50px;
+    height: 52px;
+    width: 208px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    z-index: -1;
+}
+
+.download-logo:hover{
+    color: #fff;
+}
+
+.download-logo:hover::after{
+    transform: scale(1);
 }
 
 .android-card img {
@@ -322,6 +428,10 @@ main{
     line-height: 25px;
 }
 
+.main-footer a{
+    border-bottom: 1px solid #1c1e21;
+}
+
 .slideshow-wrapper{
     width: auto;
     display: flex;
@@ -330,7 +440,7 @@ main{
 }
 
 .main-bottom{
-    width: auto;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -355,7 +465,7 @@ main{
     flex-direction: column;
     justify-content: space-between;
     margin-right: 20px;
-    width: 35%;
+    width: 40%;
 }
 
 .slideshow-side h2{
@@ -378,7 +488,9 @@ main{
     gap: 1em;
 }
 
-.slideshow-btn button{
+
+.hover-button{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -388,21 +500,76 @@ main{
     border-radius: 50%;
     height: 48px;
     width: 48px;
-    cursor: pointer;;
+    cursor: pointer;
+    z-index: 1;
 }
 
-.slideshow-btn button svg{
+.hover-button svg{
     height: 13px;
     width: 13px;
 }
 
+.hover-button::after{
+    content: "";
+    position:absolute;
+    background: #111b21;
+    color: #fff;
+    border-radius: 50px;
+    height: 48px;
+    width: 48px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    z-index: -1;
+}
+
+.hover-button:hover > svg{
+    fill: #fff;
+}
+
+.hover-button:hover::after{
+    transform: scale(1);
+}
+
+.hover-button:disabled{
+    cursor: auto;
+    color: #33463f53;
+    border: 1px solid #33463f53;
+}
+
+.hover-button:disabled:after{
+    display: none;
+}
+
+.hover-button:disabled > svg{
+    fill: #33463f53;
+}
+
+.hover-button:enabled{
+    border: 1px solid #1c1e21;
+}
+
+
 .slideshow-carrousel{
-    width: 65%;
+    width: 60%;
     display: flex;
     gap: 16px;
 }
 
-.slideshow-card img{
+.slideshow-card {
+    max-width: 500px;
+    max-height: 500px;
+    opacity: 1;
+    transition: all 0.2s linear;
+}
+
+
+.slideshow-card-img{
     border-radius: 25px;
 }
 
@@ -488,6 +655,10 @@ footer{
     margin-bottom: 0;
 }
 
+.link-group a:hover{
+    text-decoration: underline;
+}
+
 .footer-bottom{
     width: 100%;
     background-color: #111b21;
@@ -532,6 +703,37 @@ footer{
     text-decoration: none;
     border-radius: 50px;
     border: 1px solid #43cd66;
+    position: relative;
+    z-index: 1;
+}
+
+
+.download-link::after{
+    content: "";
+    position:absolute;
+    background: #fff;
+    color: #fff;
+    border-radius: 50px;
+    right: -1px;
+    height: 50px;
+    width: 186px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    z-index: -1;
+}
+
+.download-link:hover{
+    fill: #fff;
+}
+
+.download-link:hover::after{
+    transform: scale(1);
 }
 
 .footer-social-icons-wrapper{
@@ -560,6 +762,41 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon-hover{
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon-hover::after{
+    content: "";
+    position:absolute;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    right: -1px;
+    height: 50px;
+    width: 50px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    z-index: -1;
+}
+
+.social-icon-hover:hover>svg{
+    color: #111b21;
+}
+
+.social-icon-hover:hover:after{
+    transform: scale(1);
 }
 
 #footer-social-icons{
@@ -651,6 +888,11 @@ footer{
     display: none;
 }
 
+.tablet-view-slideshow-btn{
+    display: none;
+}
+
+
 
 @media screen and (max-width: 1200px) {
     main{
@@ -661,6 +903,9 @@ footer{
         display: none;
     }
     .nav-sm{
+        position: fixed;
+        width: 95%;
+        background-color: #fff;
         display: flex;
         height: 64px;
         padding: 0 24px;
@@ -958,6 +1203,10 @@ footer{
         height: 232px;
     }
 
+    .download-logo{
+        position: static;
+    }
+
     .main-top-heading h1{
         font-size: 40px;
         line-height: 1;
@@ -1031,6 +1280,7 @@ footer{
     }
 
     .tablet-view-slideshow-btn{
+        display: flex;
         margin-top: 60px;
     }
 
@@ -1187,6 +1437,10 @@ footer{
         display: none;
     }
 
+    .nav-sm{
+        width: 88%;
+    }
+
     .mobile-nav{
         top: 0;
         bottom: 0;
@@ -1262,7 +1516,7 @@ footer{
     }
 
     .main-top{
-        margin-top: 56px;
+        margin-top: 125px;
     }
 
     .main-top-heading{
@@ -1287,6 +1541,11 @@ footer{
         padding: 32px;
     }
 
+    .download-logo{
+        position: static;
+    }
+
+
     .card-heading h6{
         font-size: 12px;
     }
@@ -1297,7 +1556,7 @@ footer{
         font-weight: 300;
     }
 
-    .slideshow-card img{
+    .slideshow-card-img{
         width: 198px;
     }
 
